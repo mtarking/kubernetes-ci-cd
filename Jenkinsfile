@@ -23,8 +23,9 @@ podTemplate(label: 'docker',
           }
 
         stage "Push"
-
+          container('docker'){
             sh "docker push ${imageName}"
+          }
 
         stage "Deploy"
 
