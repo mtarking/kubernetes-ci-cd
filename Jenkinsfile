@@ -12,7 +12,7 @@ podTemplate(label: 'docker',
 
         tag = readFile('commit-id').replace("\n", "").replace("\r", "")
         appName = "hello-kenzan"
-        registryHost = "10.100.9.29/"
+        registryHost = "10.100.13.51/"
         project = "ciscolive/"
         imageName = "${registryHost}${project}${appName}:${tag}"
         env.BUILDIMG=imageName
