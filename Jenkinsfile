@@ -25,7 +25,7 @@ podTemplate(label: 'docker',
         stage "Push"
           container('docker'){
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jenkins-harbor', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASSWORD']]){
-              sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD} "
+              sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD}"
               sh "docker push ${imageName}"
             }
           }
