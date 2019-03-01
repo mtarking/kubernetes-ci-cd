@@ -10,26 +10,9 @@ podTemplate(label: 'docker',
     
         sh "git rev-parse --short HEAD > commit-id"
 
-        tag = readFile('commit-id').replace("\n", "").replace("\r", "")
-        appName = "hello-kenzan"
-        registryHost = "10.100.13.51/"
-        project = "ciscolive/"
-        imageName = "${registryHost}${project}${appName}:${tag}"
-        env.BUILDIMG=imageName
-
         stage "Build"
           container('docker'){
-            sh "docker build -t ${imageName} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
+            sh "sleep 3600"
           }
-
-        stage "Push"
-          container('docker'){
-            sh "docker push ${imageName}"
-          }
-
-        stage "Deploy"
-
-            kubernetesDeploy configs: "applications/${appName}/k8s/*.yaml", kubeconfigId: 'kenzan_kubeconfig'
-    
     }
 }
