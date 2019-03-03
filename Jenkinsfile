@@ -36,7 +36,7 @@ podTemplate(
 
       stage ('try do some kubectl work'){
         container('kubectl'){
-          sh "kubectl get nodes"
+          
         }
       }
     }
