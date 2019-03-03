@@ -34,7 +34,7 @@ podTemplate(
 
       stage "Deploy"
       container('kubectl'){
-      sh "kubectl get nodes"
+        sh "kubectl get nodes"
       }
     }
 }
