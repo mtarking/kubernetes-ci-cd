@@ -2,7 +2,7 @@ podTemplate(
   label: 'docker',
   containers: [
     containerTemplate(name: 'docker', image: 'docker:18.09.3', ttyEnabled: true, command: 'cat'), 
-    containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.12.6', command: 'cat', ttyEnabled: true, volumes: [secretVolume(secretName: 'kube-config', mountPath: '/root/.kube')]),
+    containerTemplate(name: 'kubectl', image: 'lachlanevenson/k8s-kubectl:v1.12.6', command: 'cat', ttyEnabled: true),
   ],
   volumes: [
     hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')
