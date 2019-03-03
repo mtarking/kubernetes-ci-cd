@@ -35,7 +35,6 @@ podTemplate(
       stage "Deploy"
       container('kubectl'){
         withCredentials([sshUserPrivateKey(credentialsId: 'ccpuser', usernameVariable: 'CCP_USER', keyFileVariable: 'CCP_USER_PRIVATE_KEY')]){
-          sh "ll -altrn"
           sh "kubectl get nodes"
         }
       }
