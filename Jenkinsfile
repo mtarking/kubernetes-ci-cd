@@ -36,6 +36,5 @@ podTemplate(
       container('kubectl'){
         sh "kubectl get nodes"
         }
-      }
-  }
+    }
 }
