@@ -36,7 +36,6 @@ podTemplate(
 
       stage ('try do some kubectl work'){
         container('kubectl'){
-          sh "kubectl config use-context ccp-301-ccp-calico-mt-01"
           sh "kubectl get nodes"
         }
       }
