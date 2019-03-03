@@ -34,7 +34,7 @@ podTemplate(
 
       stage "Deploy"
       container('kubectl'){
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'ccpuser', usernameVariable: 'CCP_USER', passwordVariable: 'CCP_USER_PRIVATE_KEY']]){
+        withCredentials([[$class: 'sshUserPrivateKeyMultiBinding', credentialsId: 'ccpuser', usernameVariable: 'CCP_USER', keyFileVariable: 'CCP_USER_PRIVATE_KEY']]){
           sh "kubectl get nodes"
         }
       }
