@@ -34,7 +34,9 @@ podTemplate(
 
       stage "Deploy"
       container('kubectl'){
-        sh "kubectl get nodes"
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jenkins-harbor', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASSWORD']]){
+          sh "kubectl get nodes"
         }
+      }
     }
 }
