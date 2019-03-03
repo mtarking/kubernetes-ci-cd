@@ -19,22 +19,25 @@ podTemplate(
       imageName = "${registryHost}${project}${appName}:${tag}"
       env.BUILDIMG=imageName
       
-      stage "Build"
-      container('docker'){
-        sh "docker build -t ${imageName} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
+      stage ('do some Docker work'){
+        container('docker'){
+          sh "docker build -t ${imageName} -f applications/hello-kenzan/Dockerfile applications/hello-kenzan"
+        }
       }
       
-      stage "Push"
-      container('docker'){
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jenkins-harbor', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASSWORD']]){
-          sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD} 10.100.13.51"
-          sh "docker push ${imageName}"
+      stage ('do some more Docker work'){
+        container('docker'){
+          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'jenkins-harbor', usernameVariable: 'DOCKER_HUB_USER', passwordVariable: 'DOCKER_HUB_PASSWORD']]){
+            sh "docker login -u ${env.DOCKER_HUB_USER} -p ${env.DOCKER_HUB_PASSWORD} 10.100.13.51"
+            sh "docker push ${imageName}"
+          }
         }
       }
 
-      stage "Deploy"
-      container('kubectl'){
-        sh "get nodes"
+      stage ('try do some kubectl work'){
+        container('kubectl'){
+          sh "get nodes"
+        }
       }
     }
 }
